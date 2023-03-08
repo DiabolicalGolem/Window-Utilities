@@ -1,4 +1,4 @@
-# Window-Utilities
+# Window-Utility-Hotkeys
 Various Hotkeys that add useful abilities to the windows on screen.
 
 Here are the contained hotkeys:
