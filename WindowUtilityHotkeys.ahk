@@ -44,6 +44,8 @@ if(WinGetExStyle("A") & 0x20){
 ^!2::WinSetTransparent 55, WinGetTitle("A")
 ^!1::WinSetTransparent 30, WinGetTitle("A")
 
+;Extended Function Keys
+;ALT+(Function Key)
 ^!F1::Send "{F13}"
 ^!F2::Send "{F14}"
 ^!F3::Send "{F15}"
