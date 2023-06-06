@@ -1,34 +1,51 @@
 ;Always-on-top Shortcut
 ;CTRL+SPACE
 ^!SPACE::{
-if(WinGetExStyle("A") & 0x8){
-        t:=RegExReplace(WinGetTitle("A")," ¤")
-        WinSetTitle(t, WinGetTitle("A"))
-}else{        
-        t:=WinGetTitle("A") " ¤"
-        WinSetTitle(t, WinGetTitle("A"))
-}
-WinSetAlwaysOnTop -1, t
+        if(WinGetExStyle("A") & 0x8){
+                t:=RegExReplace(WinGetTitle("A")," ¤")
+                WinSetTitle(t, WinGetTitle("A"))
+        }else{        
+                t:=WinGetTitle("A") " ¤"
+                WinSetTitle(t, WinGetTitle("A"))
+        }
+        WinSetAlwaysOnTop -1, t
 }
 
 ;Ghost-window Shortcut
 ;ALT+`
 !`::{
-tran:=WinGetTransparent("A")
-if(tran=""){
-        tran:=255
+        tran:=WinGetTransparent("A")
+        if(tran=""){
+                tran:=255
+        }
+
+        if(WinGetExStyle("A") & 0x20){
+                t:=RegExReplace(WinGetTitle("A")," ø")
+                WinSetTitle(t, WinGetTitle("A"))
+                WinSetExStyle(-0x20, t)
+        }else{
+                t:=WinGetTitle("A") " ø"
+                WinSetTitle(t, WinGetTitle("A"))
+                WinSetExStyle(+0x20, t)
+                WinSetTransparent(tran, t)
+        }
 }
 
-if(WinGetExStyle("A") & 0x20){
-        t:=RegExReplace(WinGetTitle("A")," ø")
-        WinSetTitle(t, WinGetTitle("A"))
-        WinSetExStyle(-0x20, t)
-}else{
-        t:=WinGetTitle("A") " ø"
-        WinSetTitle(t, WinGetTitle("A"))
-        WinSetExStyle(+0x20, t)
-        WinSetTransparent(tran, t)
-}
+;Hide Taskbar Button
+;CTRL+ALT+TAB
+^!Tab::{
+        DetectHiddenWindows(True)
+        t:=WinGetTitle("A")
+
+        if(WinGetExStyle("A") & 0x80){
+                WinHide(t)
+                WinSetExStyle(-0x80,t)
+                WinShow(t)
+        }else{
+                WinHide(t)
+                WinSetExStyle(+0x80,t)
+                WinShow(t)
+        }
 }
 
 ;Transparency Shortcuts
